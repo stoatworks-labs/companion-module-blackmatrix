@@ -55,10 +55,11 @@ export default function UpdateActions(self) {
     }
   };
 
-  const resolve = async (event, field) =>
-    (
-      await self.parseVariablesInString(String(event.options[field] ?? ""))
-    ).trim();
+  // Options declared `useVariables: true` arrive already expanded: Companion
+  // resolves them before invoking the callback. `parseVariablesInString` does
+  // not exist in base 2.x — on the context or on InstanceBase — and calling it
+  // throws when the action fires, while the module still loads cleanly.
+  const resolve = (event, field) => String(event.options[field] ?? "").trim();
 
   self.setActionDefinitions({
     route: {
@@ -66,8 +67,8 @@ export default function UpdateActions(self) {
       options: [destinationOption, sourceOption],
       callback: async (event) =>
         run(async () => {
-          const destination = parseRef(await resolve(event, "destination"));
-          const source = parseRef(await resolve(event, "source"));
+          const destination = parseRef(resolve(event, "destination"));
+          const source = parseRef(resolve(event, "source"));
           if (!destination || !source) {
             throw new Error(
               "route needs both a destination and a source, as deviceId:id",
@@ -94,7 +95,7 @@ export default function UpdateActions(self) {
       options: [destinationOption],
       callback: async (event) =>
         run(async () => {
-          const value = await resolve(event, "destination");
+          const value = resolve(event, "destination");
           const parsed = parseRef(value);
           if (!parsed) throw new Error(`not a destination reference: ${value}`);
           self.selectDestination(value);
@@ -111,7 +112,7 @@ export default function UpdateActions(self) {
             throw new Error(
               "no destination selected — press a destination button first",
             );
-          const source = parseRef(await resolve(event, "source"));
+          const source = parseRef(resolve(event, "source"));
           if (!source)
             throw new Error("take needs a source, as deviceId:sourceId");
           if (selected.deviceId !== source.deviceId) {
@@ -148,7 +149,7 @@ export default function UpdateActions(self) {
       ],
       callback: async (event) =>
         run(async () => {
-          const id = await resolve(event, "salvo");
+          const id = resolve(event, "salvo");
           if (!id) throw new Error("no salvo chosen");
           // A partly-applied salvo answers 409 with the crosspoints that were
           // refused. post() turns that into a thrown, logged list — the rest of
@@ -176,7 +177,7 @@ export default function UpdateActions(self) {
       ],
       callback: async (event) =>
         run(async () => {
-          const destination = parseRef(await resolve(event, "destination"));
+          const destination = parseRef(resolve(event, "destination"));
           if (!destination)
             throw new Error(
               "lock needs a destination, as deviceId:destinationId",

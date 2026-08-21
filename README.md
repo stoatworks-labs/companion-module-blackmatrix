@@ -1,4 +1,4 @@
-# companion-module-atem-crosspoint
+# companion-module-blackmatrix
 
 > **AI-assisted project.** This module was built with the help of
 > [Claude](https://claude.ai), Anthropic's AI assistant — including
@@ -7,7 +7,7 @@
 > by a test harness driving its real source against a fake crosspoint server.
 
 A [Bitfocus Companion](https://bitfocus.io/companion) connection module for
-**ATEM Crosspoint** — route a fleet of Blackmagic ATEM switchers from a Stream
+**BlackMatrix** — route a fleet of Blackmagic ATEM switchers from a Stream
 Deck: any source to any aux, ME bus, keyer input, SuperSource box or multiview
 window, plus fleet-wide salvos and destination locks.
 
@@ -24,7 +24,7 @@ window, plus fleet-wide salvos and destination locks.
 - **Locks** — lock, unlock or force-unlock a destination, with feedback. Locks
   are held per IP address, as a Videohub does it, and are shared with the
   crosspoint server's browser UI.
-- **A live label per destination** — `$(atem-crosspoint:stage_aux_0_source)` is
+- **A live label per destination** — `$(blackmatrix:stage_aux_0_source)` is
   whatever Aux 1 is carrying right now, so a monitor-wall button says so.
 
 ## Actions

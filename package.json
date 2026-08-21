@@ -1,5 +1,5 @@
 {
-  "name": "companion-module-atem-crosspoint",
+  "name": "companion-module-blackmatrix",
   "version": "1.0.0",
   "main": "src/main.js",
   "type": "module",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stoatworks-labs/companion-module-atem-crosspoint.git"
+    "url": "git+https://github.com/stoatworks-labs/companion-module-blackmatrix.git"
   },
   "engines": {
     "node": "^22.20"

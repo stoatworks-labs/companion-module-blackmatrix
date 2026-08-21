@@ -78,7 +78,7 @@ export default class ModuleInstance extends InstanceBase {
         width: 12,
         label: "Connection",
         value:
-          "ATEM Crosspoint's server, port 8533 by default. <b>There is no authentication and it binds every interface</b> — anyone who can reach that port can re-route program on a live switcher. Private production network only.",
+          "BlackMatrix's server, port 8533 by default. <b>There is no authentication and it binds every interface</b> — anyone who can reach that port can re-route program on a live switcher. Private production network only.",
       },
       {
         type: "textinput",

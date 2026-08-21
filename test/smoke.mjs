@@ -1,4 +1,4 @@
-// Drives the ATEM Crosspoint module's real source against a fake crosspoint
+// Drives the BlackMatrix module's real source against a fake crosspoint
 // server: a real HTTP server for the REST commands and a real WebSocket pushing
 // snapshots. What is checked, in order of what would actually hurt at a show:
 //
@@ -191,9 +191,6 @@ function makeSelf() {
     },
     checkAllFeedbacks() {
       this.feedbackChecks++;
-    },
-    async parseVariablesInString(value) {
-      return value;
     },
     selectDestination(reference) {
       this.selected = reference ? String(reference).trim() : null;
@@ -615,4 +612,38 @@ check(
 wss.close();
 server.close();
 clearTimeout(watchdog);
+
+// --- the parseVariablesInString trap ----------------------------------------
+// `parseVariablesInString` and `parseVariablesInField` were removed from
+// @companion-module/base 2.x. Neither is on the callback context, on
+// InstanceBase, or anywhere in the package. Companion expands a `useVariables` option itself before invoking the
+// callback, so the option arrives already resolved: the call is redundant as
+// well as fatal, throwing "... is not a function" the moment
+// that one action or feedback fires. Nothing else catches it — the module
+// loads, init() succeeds, every definition registers, and every path that does
+// not make the call keeps working, so the suite passes with the bug live. This
+// fixture no longer stubs either function, so a reintroduced call now throws
+// here too; the grep is the backstop for a path the fixture never exercises. It
+// matches the call form only, so prose naming the functions stays legal.
+const { readdirSync: pvReadDir, readFileSync: pvReadFile } =
+  await import("node:fs");
+const pvOffenders = () => {
+  const dir = new URL("../src/", import.meta.url).pathname;
+  const bad = [];
+  for (const f of pvReadDir(dir)) {
+    if (!/\.(js|ts)$/.test(f)) continue;
+    if (/parseVariablesIn(String|Field)\s*\(/.test(pvReadFile(dir + f, "utf8")))
+      bad.push(f);
+  }
+  return bad;
+};
+
+check("no parseVariablesInString/Field call survives in src/", () => {
+  assert.deepEqual(
+    pvOffenders(),
+    [],
+    "read the already-resolved event.options value instead",
+  );
+});
+
 console.log(`\n${passed} checks passed`);

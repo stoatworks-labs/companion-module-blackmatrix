@@ -7,8 +7,8 @@ Orientation for an AI assistant (or a new human) picking this up cold. There is 
 
 ## 1. What this is
 
-A **Bitfocus Companion connection module** for **ATEM Crosspoint**, the router matrix over a
-fleet of Blackmagic ATEM switchers (`stoatworks-labs/atem-crosspoint`, private). It routes
+A **Bitfocus Companion connection module** for **BlackMatrix**, the router matrix over a
+fleet of Blackmagic ATEM switchers (`stoatworks-labs/blackmatrix`, private). It routes
 crosspoints, fires salvos and takes locks.
 
 JavaScript, Node 22 runtime, `@companion-module/base` 2.x.
@@ -74,6 +74,6 @@ npm run format
 
 ## 8. Status — be precise about it
 
-**Never loaded into Companion, and never pointed at a real ATEM Crosspoint server** — the
+**Never loaded into Companion, and never pointed at a real BlackMatrix server** — the
 harness is a fake server built to this module's understanding of the API. The app it drives
 has itself never met ATEM hardware. Say so in any release note.

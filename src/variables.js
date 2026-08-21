@@ -6,12 +6,12 @@ import { deviceOf, parseRef, routeOf, safeId, sourceOf } from "./refs.js";
 // how a module ends up burning a core doing nothing.
 //
 // The per-destination `_source` variables are the point of this module for
-// anyone building a monitor wall: `$(atem-crosspoint:stage_aux_0_source)` on a
+// anyone building a monitor wall: `$(blackmatrix:stage_aux_0_source)` on a
 // button is a live label of what that output is carrying.
 
 export default function UpdateVariableDefinitions(self) {
   const defs = {
-    connection_status: { name: "Connection to ATEM Crosspoint" },
+    connection_status: { name: "Connection to BlackMatrix" },
     device_count: { name: "Switchers in the fleet" },
     online_count: { name: "Switchers connected" },
     salvo_count: { name: "Salvos defined" },

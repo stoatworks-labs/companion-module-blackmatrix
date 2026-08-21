@@ -1,6 +1,6 @@
-# ATEM Crosspoint
+# BlackMatrix
 
-Routes a fleet of Blackmagic ATEM switchers through **ATEM Crosspoint**, which
+Routes a fleet of Blackmagic ATEM switchers through **BlackMatrix**, which
 presents every bus that takes one source at a time — auxes, ME program and
 preview, keyer fill and key, SuperSource boxes, multiview windows — as a router
 destination.
@@ -56,7 +56,7 @@ case worth a button. The lock action works on any destination.
 ## Variables worth knowing
 
 - `<switcher>_<destination>_source` — a live label of what that bus is carrying,
-  e.g. `$(atem-crosspoint:stage_aux_0_source)`
+  e.g. `$(blackmatrix:stage_aux_0_source)`
 - `selected_destination_label`, `selected_destination_source`
 - `<switcher>_videohub_port`, `<switcher>_videohub_panels` — the Videohub port
   for that switcher and how many clients are on it

@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { InstanceStatus } from "@companion-module/base";
 
-// ATEM Crosspoint's two surfaces, and why this module uses both:
+// BlackMatrix's two surfaces, and why this module uses both:
 //
 //   WebSocket  /ws  — state only. It pushes ONE message type, `snapshot`, with
 //                     the whole fleet in it, coalesced to about 50ms. There is

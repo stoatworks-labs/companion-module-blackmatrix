@@ -131,7 +131,7 @@ export default function UpdateFeedbacks(self) {
 
     serviceUp: {
       type: "boolean",
-      name: "Connected to ATEM Crosspoint",
+      name: "Connected to BlackMatrix",
       defaultStyle: { bgcolor: 0x003300, color: 0x00ff00 },
       options: [],
       callback: () => self.link,
