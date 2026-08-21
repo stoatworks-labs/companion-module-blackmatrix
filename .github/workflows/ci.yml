@@ -1,0 +1,35 @@
+name: ci
+
+# The smoke test is the check worth having: it imports the module's real source,
+# which pulls in @companion-module/base and ws for real, so a dependency bump
+# that breaks them fails here rather than on someone's rack at a show.
+#
+# `npm run package` is here too, and is not redundant: it is the ONLY check that
+# catches an entrypoint or manifest break — a module can pass every unit test and
+# still be impossible to install.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # package.json pins engines.node to ^22.20; matching it here means the
+          # check runs on the same major Companion itself ships.
+          node-version: 22
+          cache: npm
+
+      # Deliberately a plain `npm ci` — no --legacy-peer-deps. A bump that only
+      # installs by ignoring the peer graph is exactly what this is here to catch.
+      - run: npm ci
+
+      - run: npm test
+
+      - run: npm run package

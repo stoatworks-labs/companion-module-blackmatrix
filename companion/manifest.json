@@ -1,0 +1,36 @@
+{
+  "$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+  "type": "connection",
+  "id": "atem-crosspoint",
+  "name": "atem-crosspoint",
+  "shortname": "ATEM Crosspoint",
+  "description": "Route a fleet of Blackmagic ATEM switchers through ATEM Crosspoint — take a source to any aux, ME bus, keyer, SuperSource box or multiview window, fire fleet-wide salvos, and lock destinations. X-Y panel presets: select a destination, then press a source.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "git+https://github.com/stoatworks-labs/companion-module-atem-crosspoint.git",
+  "bugs": "https://github.com/stoatworks-labs/companion-module-atem-crosspoint/issues",
+  "maintainers": [
+    {
+      "name": "Allan Sargeant",
+      "email": ""
+    }
+  ],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "0.0.0",
+    "entrypoint": "../src/main.js"
+  },
+  "legacyIds": [],
+  "manufacturer": "Stoatworks Labs",
+  "products": ["ATEM Crosspoint"],
+  "keywords": [
+    "atem",
+    "blackmagic",
+    "router",
+    "crosspoint",
+    "videohub",
+    "salvo",
+    "aux"
+  ]
+}
