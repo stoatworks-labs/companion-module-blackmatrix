@@ -15,11 +15,11 @@ window, plus fleet-wide salvos and destination locks.
 
 ## Download
 
-**[v1.0.1](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases/tag/v1.0.1)**
+**[v1.0.2](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases/tag/v1.0.2)**
 
 This release contains:
 
-- [`blackmatrix-1.0.1.tgz`](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases/download/v1.0.1/blackmatrix-1.0.1.tgz) — npm package, 23 KB
+- [`blackmatrix-1.0.2.tgz`](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases/download/v1.0.2/blackmatrix-1.0.2.tgz) — npm package, 23 KB
 - [`companion-module-blackmatrix-pkg.tgz`](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases/latest/download/companion-module-blackmatrix-pkg.tgz) — npm package, 23 KB
 
 All builds, checksums and release notes: [github.com/stoatworks-labs/companion-module-blackmatrix/releases](https://github.com/stoatworks-labs/companion-module-blackmatrix/releases).
