@@ -7,9 +7,9 @@
  * a second copy written in TypeScript.
  */
 
-import type { CompanionStaticTextInputField } from "@companion-module/base";
+import type { CompanionStaticTextInputField } from '@companion-module/base'
 
 export declare function aboutField(options?: {
-  name?: string;
-  id?: string;
-}): CompanionStaticTextInputField;
+	name?: string
+	id?: string
+}): CompanionStaticTextInputField

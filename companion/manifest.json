@@ -5,7 +5,7 @@
 	"name": "blackmatrix",
 	"shortname": "BlackMatrix",
 	"description": "Route a fleet of Blackmagic ATEM switchers through BlackMatrix \u2014 take a source to any aux, ME bus, keyer, SuperSource box or multiview window, fire fleet-wide salvos, and lock destinations. X-Y panel presets: select a destination, then press a source.",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"license": "MIT",
 	"repository": "git+https://github.com/stoatworks-labs/companion-module-blackmatrix.git",
 	"bugs": "https://github.com/stoatworks-labs/companion-module-blackmatrix/issues",
