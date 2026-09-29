@@ -1,8 +1,7 @@
 # companion-module-blackmatrix
 
-> **AI-assisted project.** This module was built with the help of
-> [Claude](https://claude.ai), Anthropic's AI assistant — including
-> implementation and documentation. Review it accordingly before relying on
+> **AI-assisted project.** This module was created with [Claude](https://claude.com/claude-code)
+> (Anthropic), directed and reviewed by a human author. Review it accordingly before relying on
 > it in production. It has **never been loaded into Companion**: it is verified
 > by a test harness driving its real source against a fake crosspoint server.
 
