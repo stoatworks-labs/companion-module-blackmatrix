@@ -8,7 +8,7 @@ Orientation for an AI assistant (or a new human) picking this up cold. There is 
 ## 1. What this is
 
 A **Bitfocus Companion connection module** for **BlackMatrix**, the router matrix over a
-fleet of Blackmagic ATEM switchers (`stoatworks-labs/blackmatrix`, private). It routes
+fleet of Blackmagic ATEM switchers (`stoatworks-labs/blackmatrix`, public). It routes
 crosspoints, fires salvos and takes locks.
 
 JavaScript, Node 22 runtime, `@companion-module/base` 2.x.
@@ -67,7 +67,7 @@ All of these produce a module that looks fine and quietly does nothing:
 
 ```bash
 npm install
-npm test         # 36 checks: real source vs a fake crosspoint server (HTTP + WebSocket)
+npm test         # 38 checks: real source vs a fake crosspoint server (HTTP + WebSocket)
 npm run package  # must pass before any release
 npm run format
 ```
@@ -76,4 +76,5 @@ npm run format
 
 **Never loaded into Companion, and never pointed at a real BlackMatrix server** — the
 harness is a fake server built to this module's understanding of the API. The app it drives
-has itself never met ATEM hardware. Say so in any release note.
+has since met ATEM hardware (an ATEM Mini Extreme ISO, and a live show on 2026-10-04), but
+this module hasn't. Say so in any release note.
