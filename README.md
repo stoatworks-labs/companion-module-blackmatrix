@@ -1,14 +1,14 @@
 # companion-module-blackmatrix
 
 > **AI-assisted project.** This module was created with [Claude](https://claude.com/claude-code)
-> (Anthropic), directed and reviewed by a human author. Review it accordingly before relying on
-> it in production. It has **never been loaded into Companion**: it is verified
-> by a test harness driving its real source against a fake crosspoint server.
+> (Anthropic), directed and reviewed by a human author. Check it over before you rely on it for
+> a show. It has **never been loaded into Companion**; it's been checked with a test
+> harness that runs its actual code against a fake crosspoint server.
 
-A [Bitfocus Companion](https://bitfocus.io/companion) connection module for
-**BlackMatrix** — route a fleet of Blackmagic ATEM switchers from a Stream
-Deck: any source to any aux, ME bus, keyer input, SuperSource box or multiview
-window, plus fleet-wide salvos and destination locks.
+A [Bitfocus Companion](https://bitfocus.io/companion) module for BlackMatrix, so
+you can route a fleet of Blackmagic ATEM switchers from a Stream Deck: any source
+to any aux, ME bus, keyer input, SuperSource box or multiview window, plus
+fleet-wide salvos and destination locks.
 
 <!-- downloads:start -->
 
@@ -27,19 +27,19 @@ All builds, checksums and release notes: [github.com/stoatworks-labs/companion-m
 
 ## What it does
 
-- **X-Y panel presets** — press a destination, then press a source. One button
-  per destination and one per source, which is a couple of hundred buttons for a
-  fleet instead of the tens of thousands one-per-crosspoint would need. The
-  selection lives in this Companion, so two Companions never fight over a pending
-  destination.
-- **Direct crosspoints** — a plain "route this source to this destination"
-  action when you want one button to mean one thing.
-- **Salvos** — take a named set of crosspoints across every switcher at once.
-- **Locks** — lock, unlock or force-unlock a destination, with feedback. Locks
-  are held per IP address, as a Videohub does it, and are shared with the
-  crosspoint server's browser UI.
-- **A live label per destination** — `$(blackmatrix:stage_aux_0_source)` is
-  whatever Aux 1 is carrying right now, so a monitor-wall button says so.
+- **X-Y panel presets:** press a destination, then a source. That's one button
+  per destination and one per source, which comes to a couple of hundred buttons
+  for a fleet rather than the tens of thousands you'd need with one per
+  crosspoint. The selection lives in this Companion, so two Companions never
+  fight over a pending destination.
+- **Direct crosspoints:** a plain "route this source to this destination"
+  action, for when you want one button to mean one thing.
+- **Salvos:** take a named set of crosspoints across every switcher at once.
+- **Locks:** lock, unlock or force-unlock a destination, with feedback. Locks
+  are held per IP address, the way a Videohub does it, and they're shared with
+  the crosspoint server's browser UI.
+- **A live label per destination:** `$(blackmatrix:stage_aux_0_source)` is
+  whatever Aux 1 is carrying right now, so a monitor-wall button can show it.
 
 ## Actions
 
@@ -52,25 +52,27 @@ All builds, checksums and release notes: [github.com/stoatworks-labs/companion-m
 | Take a salvo                    | Fires every crosspoint in it, fleet-wide          |
 | Lock or unlock a destination    | Lock / unlock / force / toggle                    |
 
-Destinations and sources are addressed as `deviceId:id` — `stage:aux.0`,
-`stage:1`. Both dropdowns allow a custom value, so a variable can drive them.
+Destinations and sources are addressed as `deviceId:id`, like `stage:aux.0` or
+`stage:1`. Both dropdowns take a custom value, so a variable can drive them.
 
 ## Feedbacks
 
 `crosspoint` (this destination is taking this source), `sourceOnSelected`,
 `destinationSelected`, `locked`, `deviceOnline`, `panelAttached` (someone else's
-Videohub panel is connected to that switcher), `serviceUp`.
+Videohub panel is connected to that switcher) and `serviceUp`.
 
 ## Install
 
-Not in the official Companion store. Download the `.tgz` from Releases, or clone
-this repo, then point Companion at it: **Settings → Developer modules path**.
+It's not in the official Companion store. Download the `.tgz` from Releases, or
+clone this repo, then point Companion at it with **Settings → Developer modules
+path**.
 
 ## Connection
 
-The crosspoint server's HTTP port, **8533** by default. **There is no
-authentication and it binds every interface** — anyone who can reach that port
-can re-route program on a live switcher. Private production network only.
+This is the crosspoint server's HTTP port, 8533 by default. **There's no
+authentication and it binds every interface**, so anyone who can reach that port
+can re-route program on a live switcher. Keep it on a private production network
+and nowhere else.
 
 ## Development
 
@@ -82,4 +84,4 @@ npm run package # the only check that catches a packaging break
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
