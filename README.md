@@ -10,6 +10,8 @@ you can route a fleet of Blackmagic ATEM switchers from a Stream Deck: any sourc
 to any aux, ME bus, keyer input, SuperSource box or multiview window, plus
 fleet-wide salvos and destination locks.
 
+The [project page](https://stoatworks-labs.com/software/companion-blackmatrix/) has the downloads and the [user guide](https://stoatworks-labs.com/software/companion-blackmatrix/guide/).
+
 <!-- downloads:start -->
 
 ## Download
