@@ -151,7 +151,7 @@ const wss = new WebSocketServer({ server, path: "/ws" });
 function makeSelf() {
   return {
     label: "xpt",
-    config: { host: "127.0.0.1", port: String(port) },
+    config: { host: "127.0.0.1", port },
     devices: [
       device("stage"),
       device("studio", { connection: "disconnected", videohubClients: 2 }),
@@ -608,6 +608,73 @@ check(
     );
   },
 );
+
+// The host field takes any text now, so an IPv6 address has to reach the API
+// with its brackets added. Serve the same fake server on ::1 and fetch through
+// it. check() is synchronous, so the request is made before it runs.
+const { hostPort, getJson } = await import(`${MOD}api.js`);
+const v6 = http.createServer(server.listeners("request")[0]);
+await new Promise((resolve) => v6.listen(0, "::1", resolve));
+const v6Self = { config: { host: "::1", port: v6.address().port } };
+const v6Reply = await getJson(v6Self, "/api/snapshot").catch((e) => e);
+v6.close();
+check("an IPv6 host reaches the API", () => {
+  assert.equal(
+    hostPort({ config: { host: " studio.local ", port: 1 } }),
+    "studio.local:1",
+  );
+  assert.equal(hostPort({ config: { host: "[::1]", port: 1 } }), "[::1]:1");
+  assert.equal(hostPort(v6Self), `[::1]:${v6Self.config.port}`);
+  assert.deepEqual(v6Reply, { ok: true });
+});
+
+// @companion-module/base 2.2.2 turned Regex into a proxy that logs a
+// deprecation warning for IP, HOSTNAME, PORT and the rest. The config now uses
+// plain text and number fields, and an upgrade script turns the port that
+// older saved configs hold as a string into a number.
+const ModuleInstance = (await import(`${MOD}main.js`)).default;
+const { portsToNumbers } = await import(`${MOD}upgrades.js`);
+const { readdirSync } = await import("node:fs");
+
+check("config fields: plain host text, number port, no regex", () => {
+  const fields = ModuleInstance.prototype.getConfigFields.call({});
+  const byId = Object.fromEntries(fields.map((f) => [f.id, f]));
+  assert.equal(byId.host.type, "textinput");
+  assert.equal(byId.port.type, "number");
+  assert.ok(Number.isInteger(byId.port.default), "port default is a number");
+  assert.deepEqual(
+    fields.filter((f) => "regex" in f).map((f) => f.id),
+    [],
+  );
+});
+
+// It matches the import, so comments naming the old constants stay legal.
+check("no file in src/ imports Regex", () => {
+  const offenders = readdirSync(MOD).filter(
+    (f) =>
+      /\.(js|ts)$/.test(f) &&
+      /import\s*{[^}]*\bRegex\b[^}]*}\s*from\s*["']@companion-module\/base/.test(
+        readFileSync(MOD + f, "utf8"),
+      ),
+  );
+  assert.deepEqual(offenders, [], "use a number or plain textinput field");
+});
+
+check("upgrade script turns a saved string port into a number", () => {
+  const run = (config) =>
+    portsToNumbers({}, { config, actions: [], feedbacks: [] }).updatedConfig;
+  assert.deepEqual(run({ host: "10.0.0.5", port: " 8534 " }), {
+    host: "10.0.0.5",
+    port: 8534,
+  });
+  assert.deepEqual(
+    run({ host: "h", port: "0" }),
+    { host: "h", port: 8533 },
+    "anything that is not a port falls back to the default",
+  );
+  assert.equal(run({ host: "h", port: 8533 }), null);
+  assert.equal(run(null), null);
+});
 
 wss.close();
 server.close();

@@ -20,8 +20,17 @@ import { InstanceStatus } from "@companion-module/base";
 
 const RECONNECT_MS = 3000;
 
+// The host field takes any text, so an IPv6 address needs its brackets added
+// before it can sit in a URL.
+export function hostPort(self) {
+  const host = String(self.config.host).trim();
+  const bracketed =
+    host.includes(":") && !host.startsWith("[") ? `[${host}]` : host;
+  return `${bracketed}:${self.config.port}`;
+}
+
 function base(self) {
-  return `http://${self.config.host}:${self.config.port}`;
+  return `http://${hostPort(self)}`;
 }
 
 /** POST a command. Throws with the server's own reason when it refuses. */
@@ -68,7 +77,7 @@ class Socket {
     const self = this.self;
     if (!self) return;
 
-    const url = `ws://${self.config.host}:${self.config.port}/ws`;
+    const url = `ws://${hostPort(self)}/ws`;
     let ws;
     try {
       ws = new WebSocket(url);

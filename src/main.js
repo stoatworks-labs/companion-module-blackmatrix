@@ -1,4 +1,4 @@
-import { InstanceBase, InstanceStatus, Regex } from "@companion-module/base";
+import { InstanceBase, InstanceStatus } from "@companion-module/base";
 import { UpgradeScripts } from "./upgrades.js";
 import UpdateActions from "./actions.js";
 import UpdateFeedbacks from "./feedbacks.js";
@@ -80,21 +80,27 @@ export default class ModuleInstance extends InstanceBase {
         value:
           "BlackMatrix's server, port 8533 by default. <b>There is no authentication and it binds every interface</b> — anyone who can reach that port can re-route program on a live switcher. Private production network only.",
       },
+      // Plain text and number fields rather than Regex.HOSTNAME / Regex.PORT,
+      // which base 2.2.2 deprecated. A saved string port is converted in
+      // upgrades.js.
       {
         type: "textinput",
         id: "host",
         label: "Crosspoint host",
+        tooltip: "IP address (IPv4 or IPv6) or hostname",
         width: 8,
+        minLength: 1,
         default: "127.0.0.1",
-        regex: Regex.HOSTNAME,
       },
       {
-        type: "textinput",
+        type: "number",
         id: "port",
         label: "Port",
         width: 4,
-        default: "8533",
-        regex: Regex.PORT,
+        min: 1,
+        max: 65535,
+        asInteger: true,
+        default: 8533,
       },
       {
         type: "static-text",

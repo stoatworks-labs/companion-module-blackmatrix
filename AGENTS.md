@@ -67,7 +67,7 @@ All of these produce a module that looks fine and quietly does nothing:
 
 ```bash
 npm install
-npm test         # 38 checks: real source vs a fake crosspoint server (HTTP + WebSocket)
+npm test         # 42 checks: real source vs a fake crosspoint server (HTTP + WebSocket)
 npm run package  # must pass before any release
 npm run format
 ```

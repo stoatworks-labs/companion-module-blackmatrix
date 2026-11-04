@@ -80,7 +80,7 @@ and nowhere else.
 
 ```bash
 npm install
-npm test        # harness: real source vs a fake crosspoint server, 38 checks
+npm test        # harness: real source vs a fake crosspoint server, 42 checks
 npm run package # the only check that catches a packaging break
 ```
 
